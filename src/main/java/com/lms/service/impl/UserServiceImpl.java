@@ -84,6 +84,14 @@ public class UserServiceImpl implements UserService {
                     .collect(Collectors.toList());
         }
 
+        if(searchBookRequest.getFilterBy().equals("price")) {
+            List<BookResponse> books = libraryDataStore.getAllBooks();
+
+            return books.stream()
+                    .filter(book -> book.getPrice() == Double.parseDouble(searchBookRequest.getName()))
+                    .collect(Collectors.toList());
+        }
+
         return Collections.emptyList();
     }
 }
